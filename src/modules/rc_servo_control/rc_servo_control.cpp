@@ -168,9 +168,9 @@ void RCServoControl::run()
             */
 
 			/* directly pass rc_channels data to actuator_controls data */
-			act_ctl.control[4] = rc_channels_raw.channels[10];  // channel 11
-			act_ctl.control[5] = rc_channels_raw.channels[11];  // channel 12
-			act_ctl.control[6] = rc_channels_raw.channels[14];  // channel 15
+			act_ctl.control[4] = rc_channels_raw.channels[11];  // channel 11
+			act_ctl.control[5] = rc_channels_raw.channels[14];  // channel 12
+			act_ctl.control[6] = rc_channels_raw.channels[10];  // channel 15
 			act_ctl.control[7] = rc_channels_raw.channels[15];  // channel 16
 
 			orb_publish(ORB_ID(actuator_controls_1), act_ctl_pub, &act_ctl);
