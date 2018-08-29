@@ -146,6 +146,10 @@ set(config_module_list
 	# Demo apps
 	#
 
+	modules/rc_servo_control
+	# Simple app that controls servos using RC
+	examples/px4_rc_servo_control
+
 	# Tutorial code from
 	# https://px4.io/dev/px4_simple_app
 	examples/px4_simple_app
