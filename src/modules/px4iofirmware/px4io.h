@@ -66,7 +66,7 @@
 #define PX4IO_CONTROL_CHANNELS		8
 #define PX4IO_CONTROL_GROUPS		4
 #define PX4IO_RC_INPUT_CHANNELS		18
-#define PX4IO_RC_MAPPED_CONTROL_CHANNELS		8 /**< This is the maximum number of channels mapped/used */
+#define PX4IO_RC_MAPPED_CONTROL_CHANNELS	 8 /**< This is the maximum number of channels mapped/used */
 
 /*
  * Debug logging

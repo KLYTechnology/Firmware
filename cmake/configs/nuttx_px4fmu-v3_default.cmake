@@ -81,6 +81,7 @@ set(config_module_list
 	modules/mavlink/mavlink_tests
 	modules/uORB/uORB_tests
 	systemcmds/tests
+	modules/module
 
 	#
 	# General system control

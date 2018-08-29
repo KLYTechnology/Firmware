@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *   Copyright (C) 2012 PX4 Development Team. All rights reserved.
+ *   Copyright (c) 2018 PX4 Development Team. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -31,34 +31,52 @@
  *
  ****************************************************************************/
 
-/**
- * @file ppm_decode.h
- *
- * PPM input decoder.
- */
-
 #pragma once
 
-#include <drivers/drv_hrt.h>
+#include <px4_module.h>
+#include <px4_module_params.h>
 
-/**
- * Maximum number of channels that we will decode.
- */
-#define PPM_MAX_CHANNELS	16
+extern "C" __EXPORT int module_main(int argc, char *argv[]);
 
-/* PPM input nominal min/max values */
-#define PPM_MIN 1000
-#define PPM_MAX 2000
-#define PPM_MID ((PPM_MIN + PPM_MAX) / 2)
 
-__BEGIN_DECLS
+class Module : public ModuleBase<Module>, public ModuleParams
+{
+public:
+	Module(int example_param, bool example_flag);
 
-/*
- * PPM decoder state
- */
-__EXPORT extern uint16_t	ppm_buffer[PPM_MAX_CHANNELS];	/**< decoded PPM channel values */
-__EXPORT extern uint16_t	ppm_frame_length;				/**< length of the decoded PPM frame (includes gap) */
-__EXPORT extern unsigned	ppm_decoded_channels;	/**< count of decoded channels */
-__EXPORT extern hrt_abstime	ppm_last_valid_decode;	/**< timestamp of the last valid decode */
+	virtual ~Module() = default;
 
-__END_DECLS
+	/** @see ModuleBase */
+	static int task_spawn(int argc, char *argv[]);
+
+	/** @see ModuleBase */
+	static Module *instantiate(int argc, char *argv[]);
+
+	/** @see ModuleBase */
+	static int custom_command(int argc, char *argv[]);
+
+	/** @see ModuleBase */
+	static int print_usage(const char *reason = nullptr);
+
+	/** @see ModuleBase::run() */
+	void run() override;
+
+	/** @see ModuleBase::print_status() */
+	int print_status() override;
+
+private:
+
+	/**
+	 * Check for parameter changes and update them if needed.
+	 * @param parameter_update_sub uorb subscription to parameter_update
+	 * @param force for a parameter update
+	 */
+	void parameters_update(int parameter_update_sub, bool force = false);
+
+
+	DEFINE_PARAMETERS(
+		(ParamInt<px4::params::SYS_AUTOSTART>) _sys_autostart,   /**< example parameter */
+		(ParamInt<px4::params::SYS_AUTOCONFIG>) _sys_autoconfig  /**< another parameter */
+	)
+};
+

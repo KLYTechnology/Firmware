@@ -306,6 +306,29 @@ then
 	pwm disarmed -c 7 -p p:PWM_MAIN_DIS7
 	pwm disarmed -c 8 -p p:PWM_MAIN_DIS8
 
+
+    #
+    # set channels 1234 separately, override
+    #
+    set PWM_RATE 400
+    set PWM_OUT 1234
+    set PWM_MAX 2000
+    set PWM_MIN 1000
+	pwm rate -c ${PWM_OUT} -r ${PWM_RATE}
+	pwm min -c ${PWM_OUT} -p ${PWM_MIN}
+	pwm max -c ${PWM_OUT} -p ${PWM_MAX}
+
+    #
+    # set channels 5678 separately, override
+    #
+	set PWM_OUT 5678
+	set PWM_MAX 2200
+	set PWM_MIN 800
+	pwm min -c ${PWM_OUT} -p ${PWM_MIN}
+    pwm max -c ${PWM_OUT} -p ${PWM_MAX}
+
+    set FAILSAFE 1500
+
 	if [ $FAILSAFE != none ]
 	then
 		pwm failsafe -c ${PWM_OUT} -p ${FAILSAFE} -d ${OUTPUT_DEV}

@@ -1,0 +1,53 @@
+Mixer file for KLY Delta X3 drone
+====================================================
+
+MAIN 1234 PWM outputs just use default quad 4x mixer file
+
+MAIN 5678 PWM outputs use RC direct feedback
+
+MAIN 5: servo 1, front right servo,       2000us->quad 1000us->fixed wing
+Control group #1, index 4 (aux0), RC channel 12
+-----------------------------------------------
+
+MAIN 6: servo 2, rear left servo,         1000us->quad 2000us->fixed wing
+Control group #1, index 5 (aux1), RC channel 15
+-----------------------------------------------
+
+MAIN 7: servo 3, front left servo,        1000us->quad 2000us->fixed wing
+Control group #1, index 6 (aux2), RC channel 11
+-----------------------------------------------
+
+MAIN 8: servo 4, rear right servo,        2000us->quad 1000us->fixed wing
+Control group #1, index 7 (aux3), RC channel 16
+-----------------------------------------------
+====================================================
+
+MAIN 1234 mixer:
+R: 4w 10000 10000 10000 0
+====================================================
+
+MAIN 5678 mixer:
+
+MAIN 5
+------
+M: 1
+O: -10000   -10000  0   -10000  10000
+S: 1 4  10000  10000      0 -10000  10000
+
+MAIN 6
+------
+M: 1
+O: 10000   10000  0   -10000  10000
+S: 1 5  10000  10000      0 -10000  10000
+
+MAIN 7
+------
+M: 1
+O: 10000   10000  0   -10000  10000
+S: 1 6  10000  10000      0 -10000  10000
+
+MAIN 8
+------
+M: 1
+O: -10000   -10000  0   -10000  10000
+S: 1 7  10000  10000      0 -10000  10000

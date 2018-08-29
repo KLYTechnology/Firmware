@@ -35,9 +35,10 @@
  * @file px4_simple_app.c
  * Minimal application example for PX4 autopilot
  *
- * @author Example User <mail@example.com>
+ * @author Hank Yang <hankyang94@gmail.com>
  */
 
+#include <px4_log.h>
 #include <px4_config.h>
 #include <px4_tasks.h>
 #include <px4_posix.h>
@@ -57,10 +58,11 @@ int px4_simple_app_main(int argc, char *argv[])
 {
 	PX4_INFO("Hello Sky!");
 
+
 	/* subscribe to sensor_combined topic */
 	int sensor_sub_fd = orb_subscribe(ORB_ID(sensor_combined));
 	/* limit the update rate to 5 Hz */
-	orb_set_interval(sensor_sub_fd, 200);
+	orb_set_interval(sensor_sub_fd, 100);
 
 	/* advertise attitude topic */
 	struct vehicle_attitude_s att;
@@ -77,7 +79,7 @@ int px4_simple_app_main(int argc, char *argv[])
 
 	int error_counter = 0;
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 10; i++) {
 		/* wait for sensor update of 1 file descriptor for 1000 ms (1 second) */
 		int poll_ret = px4_poll(fds, 1, 1000);
 
@@ -96,6 +98,8 @@ int px4_simple_app_main(int argc, char *argv[])
 			error_counter++;
 
 		} else {
+
+		    PX4_INFO("%d", poll_ret);
 
 			if (fds[0].revents & POLLIN) {
 				/* obtained data for the first file descriptor */
@@ -122,6 +126,8 @@ int px4_simple_app_main(int argc, char *argv[])
 			 */
 		}
 	}
+
+
 
 	PX4_INFO("exiting");
 
