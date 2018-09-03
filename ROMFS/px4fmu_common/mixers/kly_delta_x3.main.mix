@@ -1,7 +1,7 @@
 Mixer file for KLY Delta X3 drone
 ====================================================
 
-MAIN 1234 PWM outputs just use default quad 4x mixer file
+MAIN 1234 PWM outputs use kly quad 4kly mixer file
 
 MAIN 5678 PWM outputs use RC direct feedback
 
